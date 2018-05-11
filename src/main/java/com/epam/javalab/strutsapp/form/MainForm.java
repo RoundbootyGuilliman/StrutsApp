@@ -3,17 +3,17 @@ package com.epam.javalab.strutsapp.form;
 import com.epam.javalab.strutsapp.entity.News;
 import org.apache.struts.action.ActionForm;
 
-import java.util.List;
+import java.util.Map;
 
 public class MainForm extends ActionForm{
 
-	List<News> newsList;
+	private Map<Integer, News> newsMap;
 
-	public List<News> getNewsList() {
-		return newsList;
+	public Map<Integer, News> getNewsMap() {
+		return newsMap;
 	}
 
-	public void setNewsList(List<News> newsList) {
-		this.newsList = newsList;
+	public void setNewsMap(Map<Integer, News> newsMap) {
+		this.newsMap = newsMap;
 	}
 }

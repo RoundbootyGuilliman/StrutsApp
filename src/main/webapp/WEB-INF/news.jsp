@@ -24,11 +24,10 @@
 	<div class="row">
 		<tag:sidebar/>
 		<div class="col-sm-8">
-			<h2><bean:write name="newsForm" property="news.title"/></h2>
-			<h5><bean:write name="newsForm" property="news.author"/>,
-				<bean:write name="newsForm" property="news.date"/></h5>
+			<h2>${newsForm.news.title}</h2>
+			<h5>${newsForm.news.author}, ${newsForm.news.date}</h5>
 			<div class="fakeimg">Fake Image</div>
-			<p><bean:write name="newsForm" property="news.content"/></p>
+			<p>${newsForm.news.content}</p>
 			<br>
 		</div>
 	</div>

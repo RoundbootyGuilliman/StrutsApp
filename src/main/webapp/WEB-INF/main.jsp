@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html lang="en">
 <head>
@@ -25,13 +25,12 @@
 	<div class="row">
 		<tag:sidebar/>
 		<div class="col-sm-8">
-			<logic:iterate name="mainForm" property="newsList" id="newsItem">
+			<logic:iterate name="mainForm" property="newsMap" id="newsEntry">
 
-				<h2>${newsItem.title}</h2>
-				<h5>${newsItem.author},
-						${newsItem.date}</h5>
+				<h2>${newsEntry.value.title}</h2>
+				<h5>${newsEntry.value.author}, ${newsEntry.value.date}</h5>
 				<div class="fakeimg">Fake Image</div>
-				<p>${newsItem.brief}...</p>
+				<p>${newsEntry.value.brief}...</p>
 
 				<html:link page="/news.do"><p>Читать далее без регистрации и СМС...</p></html:link>
 				<br>

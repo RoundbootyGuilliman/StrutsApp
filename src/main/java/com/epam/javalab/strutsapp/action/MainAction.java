@@ -27,13 +27,11 @@ public class MainAction extends Action {
 
 		MainForm mainForm = (MainForm) form;
 		Map<Integer, News> newsMap = newsDAO.getAllNews();
-		List<News> newsList = new ArrayList<>();
 		for (Map.Entry<Integer, News> entry : newsMap.entrySet()) {
 			TimeAndDateHandler.setDate(entry.getValue(), (Locale) request.getSession().getAttribute(Globals.LOCALE_KEY));
-			newsList.add(entry.getValue());
 		}
 
-		mainForm.setNewsList(newsList);
+		mainForm.setNewsMap(newsMap);
 
 		return mapping.findForward("success");
 	}
