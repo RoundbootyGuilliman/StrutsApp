@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="mainForm" type="com.epam.javalab.strutsapp.form.MainForm"/>
+		<form-bean name="newsForm" type="com.epam.javalab.strutsapp.form.NewsForm"/>
+		<form-bean name="userForm" type="com.epam.javalab.strutsapp.form.UserForm"/>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/main" type="com.epam.javalab.strutsapp.action.MainAction" name="mainForm">
+			<forward name="success" path="/WEB-INF/main.jsp"/>
+		</action>
+
+		<action path="/news" type="com.epam.javalab.strutsapp.action.NewsAction" name="newsForm">
+			<forward name="success" path="/WEB-INF/news.jsp"/>
+		</action>
+
+		<action path="/locale" type="com.epam.javalab.strutsapp.action.LanguageSelectAction" parameter="method">
+			<forward name="success" path="index.jsp" redirect="true"/>
+		</action>
+	</action-mappings>
+
+	<message-resources parameter="com.epam.javalab.strutsapp.properties.strutsapp" />
+
+</struts-config>
