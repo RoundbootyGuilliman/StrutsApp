@@ -1,13 +1,28 @@
 package com.epam.javalab.strutsapp.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "NEWS")
 public class News {
 
+	@Id @GeneratedValue
+	@Column(name = "ID")
 	private int id;
+
+	@Column(name = "TITLE")
 	private String title;
+
+	@Column(name = "TIME")
 	private long time;
-	private String date;
+
+	@Column(name = "BRIEF")
 	private String brief;
+
+	@Column(name = "CONTENT")
 	private String content;
+
+	@Column(name = "AUTHOR")
 	private String author;
 
 	public News() {}
@@ -36,13 +51,13 @@ public class News {
 		this.time = time;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
+//	public String getDate() {
+//		return date;
+//	}
+//
+//	public void setDate(String date) {
+//		this.date = date;
+//	}
 
 	public String getBrief() {
 		return brief;

@@ -28,7 +28,7 @@
 			<logic:iterate name="mainForm" property="newsMap" id="newsEntry">
 
 				<h2>${newsEntry.value.title}</h2>
-				<h5>${newsEntry.value.author}, ${newsEntry.value.date}</h5>
+				<h5>${newsEntry.value.author}, ${newsEntry.value.time}</h5>
 				<div class="fakeimg">Fake Image</div>
 				<p>${newsEntry.value.brief}...</p>
 

@@ -24,8 +24,7 @@
 			Oracle_1
 		</property>
 
-		<!-- List of XML mapping files -->
-		<mapping resource="News.hbm.xml"/>
+		<mapping class="com.epam.javalab.strutsapp.entity.News"/>
 
 	</session-factory>
 </hibernate-configuration>

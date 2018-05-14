@@ -13,6 +13,6 @@ public class TimeAndDateHandler {
     public static void setDate(News news, Locale locale) {
         DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.LONG, locale);
         Date date = new Date(news.getTime());
-        news.setDate(dateFormatter.format(date));
+        //news.setDate(dateFormatter.format(date));
     }
 }
