@@ -2,73 +2,114 @@ package com.epam.javalab.strutsapp.dao.impl;
 
 import com.epam.javalab.strutsapp.dao.INewsDAO;
 import com.epam.javalab.strutsapp.entity.News;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
-import java.sql.Connection;
 
-import oracle.jdbc.pool.OracleDataSource;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class NewsDAO implements INewsDAO {
 
-	private String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
-	private String userid = "sys as sysdba";
-	private String password = "Oracle_1";
+	private static SessionFactory factory;
 
-	private Connection conn;
-
-	public NewsDAO() {
-		try {
-			OracleDataSource dataSource = new OracleDataSource();
-			dataSource.setURL(jdbcUrl);
-			conn = dataSource.getConnection(userid, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
+	@Override
 	public Map<Integer, News> getAllNews() {
-		Map<Integer, News> newsMap = new HashMap<>();
-		News news = new News();
+		Session session = factory.openSession();
+		Transaction tx = null;
+
 		try {
-			PreparedStatement statement = conn.prepareStatement("SELECT * FROM NEWS");
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				news.setId(resultSet.getInt(1));
-				news.setTitle(resultSet.getString(2));
-				news.setAuthor(resultSet.getString(3));
-				news.setTime(resultSet.getLong(4));
-				news.setBrief(resultSet.getString(5));
-				news.setContent(resultSet.getString(6));
-				newsMap.put(news.getId(), news);
+			tx = session.beginTransaction();
+			List newsList = session.createQuery("SELECT FROM NEWS").list();
+			for (Iterator iterator = newsList.iterator(); iterator.hasNext();){
+				News news = (News) iterator.next();
+				System.out.print(news.getTitle());
 			}
-		} catch (SQLException e) {
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
 			e.printStackTrace();
+		} finally {
+			session.close();
 		}
-		return newsMap;
+		return null;
 	}
 
+	@Override
 	public News getNewsById(int id) {
-		News news = new News();
-		try {
-			PreparedStatement statement = conn.prepareStatement("SELECT * FROM NEWS WHERE ID=?");
-			statement.setInt(1, id);
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				news.setId(resultSet.getInt(1));
-				news.setTitle(resultSet.getString(2));
-				news.setAuthor(resultSet.getString(3));
-				news.setTime(resultSet.getLong(4));
-				news.setBrief(resultSet.getString(5));
-				news.setContent(resultSet.getString(6));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return news;
+		return null;
 	}
+
+
+
+	public void initNewsDAO() {
+		try {
+			factory = new Configuration().configure().buildSessionFactory();
+		} catch (Throwable ex) {
+			System.err.println("Failed to create sessionFactory object." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
+//	/* Method to CREATE an employee in the database */
+//	public Integer addEmployee(String fname, String lname, int salary){
+//		Session session = factory.openSession();
+//		Transaction tx = null;
+//		Integer employeeID = null;
+//
+//		try {
+//			tx = session.beginTransaction();
+//			Employee employee = new Employee(fname, lname, salary);
+//			employeeID = (Integer) session.save(employee);
+//			tx.commit();
+//		} catch (HibernateException e) {
+//			if (tx!=null) tx.rollback();
+//			e.printStackTrace();
+//		} finally {
+//			session.close();
+//		}
+//		return employeeID;
+//	}
+
+
+	/* Method to UPDATE salary for an employee */
+//	public void updateEmployee(Integer EmployeeID, int salary ){
+//		Session session = factory.openSession();
+//		Transaction tx = null;
+//
+//		try {
+//			tx = session.beginTransaction();
+//			Employee employee = (Employee)session.get(Employee.class, EmployeeID);
+//			employee.setSalary( salary );
+//			session.update(employee);
+//			tx.commit();
+//		} catch (HibernateException e) {
+//			if (tx!=null) tx.rollback();
+//			e.printStackTrace();
+//		} finally {
+//			session.close();
+//		}
+////	}
+//
+//	/* Method to DELETE an employee from the records */
+//	public void deleteEmployee(Integer EmployeeID){
+//		Session session = factory.openSession();
+//		Transaction tx = null;
+//
+//		try {
+//			tx = session.beginTransaction();
+//			Employee employee = (Employee)session.get(Employee.class, EmployeeID);
+//			session.delete(employee);
+//			tx.commit();
+//		} catch (HibernateException e) {
+//			if (tx!=null) tx.rollback();
+//			e.printStackTrace();
+//		} finally {
+//			session.close();
+//		}
+//	}
 }
