@@ -38,7 +38,6 @@ public class NewsDAO implements INewsDAO {
 			for (Iterator iterator = newsList.iterator(); iterator.hasNext();){
 				News news = (News) iterator.next();
 				newsMap.put(news.getId(), news);
-				System.out.print(news.getTitle());
 			}
 			tx.commit();
 		} catch (HibernateException e) {
@@ -52,7 +51,21 @@ public class NewsDAO implements INewsDAO {
 
 	@Override
 	public News getNewsById(int id) {
-		return null;
+		Session session = factory.openSession();
+		Transaction tx = null;
+		List newsList = null;
+
+		try {
+			tx = session.beginTransaction();
+			newsList = session.createQuery("FROM News WHERE id=0").list();
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return (News) newsList.get(0);
 	}
 
 
