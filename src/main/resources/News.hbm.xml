@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+		"-//Hibernate/Hibernate Mapping DTD//EN"
+		"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name = "com.epam.javalab.strutsapp.entity.News" table = "NEWS">
+
+		<id name = "id" type = "int" column = "ID">
+			<generator class="native"/>
+		</id>
+
+		<property name = "title" column = "TITLE" type = "string"/>
+		<property name = "time" column = "TIME" type = "long"/>
+		<property name = "brief" column = "BRIEF" type = "string"/>
+		<property name = "content" column = "CONTENT" type = "string"/>
+		<property name = "author" column = "AUTHOR" type = "string"/>
+
+	</class>
+</hibernate-mapping>
