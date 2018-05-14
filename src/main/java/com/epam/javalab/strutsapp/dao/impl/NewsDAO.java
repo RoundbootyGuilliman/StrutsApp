@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,16 +17,27 @@ public class NewsDAO implements INewsDAO {
 
 	private static SessionFactory factory;
 
+	public NewsDAO() {
+		try {
+			factory = new Configuration().configure().buildSessionFactory();
+		} catch (Throwable ex) {
+			System.err.println("Failed to create sessionFactory object." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
 	@Override
 	public Map<Integer, News> getAllNews() {
 		Session session = factory.openSession();
 		Transaction tx = null;
+		Map<Integer, News> newsMap = new HashMap<>();
 
 		try {
 			tx = session.beginTransaction();
-			List newsList = session.createQuery("SELECT FROM NEWS").list();
+			List newsList = session.createQuery("FROM News").list();
 			for (Iterator iterator = newsList.iterator(); iterator.hasNext();){
 				News news = (News) iterator.next();
+				newsMap.put(news.getId(), news);
 				System.out.print(news.getTitle());
 			}
 			tx.commit();
@@ -36,7 +47,7 @@ public class NewsDAO implements INewsDAO {
 		} finally {
 			session.close();
 		}
-		return null;
+		return newsMap;
 	}
 
 	@Override
@@ -44,16 +55,6 @@ public class NewsDAO implements INewsDAO {
 		return null;
 	}
 
-
-
-	public void initNewsDAO() {
-		try {
-			factory = new Configuration().configure().buildSessionFactory();
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
-	}
 
 //	/* Method to CREATE an employee in the database */
 //	public Integer addEmployee(String fname, String lname, int salary){
