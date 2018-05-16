@@ -2,9 +2,9 @@ package com.epam.javalab.strutsapp.action;
 
 import com.epam.javalab.strutsapp.dao.INewsDAO;
 import com.epam.javalab.strutsapp.dao.impl.NewsDAO;
-import com.epam.javalab.strutsapp.entity.News;
 import com.epam.javalab.strutsapp.form.NewsForm;
-import com.epam.javalab.strutsapp.util.TimeAndDateHandler;
+import com.epam.javalab.strutsapp.service.INewsService;
+import com.epam.javalab.strutsapp.service.impl.NewsService;
 import org.apache.struts.Globals;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -17,18 +17,15 @@ import java.util.Locale;
 
 public class NewsAction extends Action {
 
-	private INewsDAO newsDAO = new NewsDAO();
-
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 								 HttpServletRequest request, HttpServletResponse response) {
 
 		NewsForm newsForm = (NewsForm) form;
+		Locale locale = (Locale) request.getSession().getAttribute(Globals.LOCALE_KEY);
 
-		News news = newsDAO.getNewsById(0);
+		INewsService service = new NewsService();
 
-		TimeAndDateHandler.setDate(news, (Locale) request.getSession().getAttribute(Globals.LOCALE_KEY));
-
-		newsForm.setNews(news);
+		newsForm.setNews(service.getNewsById(0, locale));
 
 		return mapping.findForward("success");
 	}

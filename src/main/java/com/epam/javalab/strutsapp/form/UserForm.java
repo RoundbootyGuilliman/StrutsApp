@@ -9,8 +9,8 @@ import org.apache.struts.action.ActionMessage;
 
 public class UserForm extends ActionForm{
 
-	String username;
-	String password;
+	private String username;
+	private String password;
 
 	public String getUsername() {
 		return username;

@@ -1,31 +1,15 @@
-package com.epam.javalab.strutsapp.entity;
+package com.epam.javalab.strutsapp.dto;
 
-import javax.persistence.*;
+public class NewsDTO {
 
-@Entity
-@Table(name = "NEWS")
-public class News {
-
-	@Id @GeneratedValue
-	@Column(name = "ID")
 	private int id;
-
-	@Column(name = "TITLE")
 	private String title;
-
-	@Column(name = "AUTHOR")
 	private String author;
-
-	@Column(name = "TIME")
 	private long time;
-
-	@Column(name = "BRIEF")
+	private String date;
 	private String brief;
-
-	@Column(name = "CONTENT")
 	private String content;
 
-	public News() {}
 
 	public int getId() {
 		return id;
@@ -57,6 +41,14 @@ public class News {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getBrief() {
