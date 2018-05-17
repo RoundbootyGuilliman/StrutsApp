@@ -1,7 +1,5 @@
 package com.epam.javalab.strutsapp.action;
 
-import com.epam.javalab.strutsapp.dao.INewsDAO;
-import com.epam.javalab.strutsapp.dao.impl.NewsDAO;
 import com.epam.javalab.strutsapp.form.NewsForm;
 import com.epam.javalab.strutsapp.service.INewsService;
 import com.epam.javalab.strutsapp.service.impl.NewsService;
@@ -17,13 +15,13 @@ import java.util.Locale;
 
 public class NewsAction extends Action {
 
+	INewsService service = new NewsService();
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 								 HttpServletRequest request, HttpServletResponse response) {
 
 		NewsForm newsForm = (NewsForm) form;
 		Locale locale = (Locale) request.getSession().getAttribute(Globals.LOCALE_KEY);
-
-		INewsService service = new NewsService();
 
 		newsForm.setNews(service.getNewsById(0, locale));
 

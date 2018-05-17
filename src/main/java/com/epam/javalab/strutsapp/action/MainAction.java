@@ -15,13 +15,13 @@ import java.util.Locale;
 
 public class MainAction extends Action {
 
+	INewsService service = new NewsService();
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 								 HttpServletRequest request, HttpServletResponse response) {
 
 		MainForm mainForm = (MainForm) form;
 		Locale locale = (Locale) request.getSession().getAttribute(Globals.LOCALE_KEY);
-
-		INewsService service = new NewsService();
 
 		mainForm.setNewsMap(service.getAllNews(locale));
 
