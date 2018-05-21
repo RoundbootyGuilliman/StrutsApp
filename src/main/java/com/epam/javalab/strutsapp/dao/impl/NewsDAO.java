@@ -2,72 +2,74 @@ package com.epam.javalab.strutsapp.dao.impl;
 
 import com.epam.javalab.strutsapp.dao.INewsDAO;
 import com.epam.javalab.strutsapp.entity.News;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.*;
 
+@Component("newsDAO")
 public class NewsDAO implements INewsDAO {
 
-	private static SessionFactory factory;
+	private static SessionFactory sessionFactory;
 
-	public NewsDAO() {
+	@PostConstruct
+	private void init() {
+		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
-			factory = new Configuration().configure().buildSessionFactory();
+			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Throwable ex) {
 			System.err.println("Failed to create sessionFactory object." + ex);
+			StandardServiceRegistryBuilder.destroy(registry);
 			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
+	@PreDestroy
+	private void destroy() {
+		if (sessionFactory != null ) {
+			sessionFactory.close();
 		}
 	}
 
 	@Override
 	public Map<Integer, News> getAllNews() {
-		Session session = factory.openSession();
-		Transaction tx = null;
+		Session session = sessionFactory.openSession();
 		Map<Integer, News> newsMap = new HashMap<>();
+		session.beginTransaction();
 
-		try {
-			tx = session.beginTransaction();
-			List newsList = session.createQuery("FROM News").list();
-			for (Iterator iterator = newsList.iterator(); iterator.hasNext();){
-				News news = (News) iterator.next();
-				newsMap.put(news.getId(), news);
-			}
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx!=null) tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
+		List<News> newsList = session.createQuery("from News").list();
+		for (News news : newsList) {
+			newsMap.put(news.getId(), news);
 		}
+		session.getTransaction().commit();
+		session.close();
 		return newsMap;
 	}
 
 	@Override
 	public News getNewsById(int id) {
-		Session session = factory.openSession();
-		Transaction tx = null;
-		List newsList = null;
-
-		try {
-			tx = session.beginTransaction();
-			newsList = session.createQuery("FROM News WHERE id=0").list();
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx!=null) tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return (News) newsList.get(0);
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		News news = (News) session.createQuery("FROM News WHERE id=0").uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+		return news;
 	}
 
+	@Override
+	public void saveNews(News news) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(news);
+		session.getTransaction().commit();
+		session.close();
+	}
 
 //	/* Method to CREATE an employee in the database */
 //	public Integer addEmployee(String fname, String lname, int salary){

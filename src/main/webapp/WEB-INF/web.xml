@@ -36,4 +36,15 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>com.epam.javalab.strutsapp.util.AppConfig</param-value>
+	</context-param>
 </web-app>

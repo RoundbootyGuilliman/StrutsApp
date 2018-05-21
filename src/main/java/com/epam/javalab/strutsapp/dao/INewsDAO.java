@@ -8,4 +8,5 @@ public interface INewsDAO {
 
 	Map<Integer, News> getAllNews();
 	News getNewsById(int id);
+	void saveNews(News news);
 }

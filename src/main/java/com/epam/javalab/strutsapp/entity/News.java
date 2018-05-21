@@ -1,5 +1,7 @@
 package com.epam.javalab.strutsapp.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ import javax.persistence.*;
 public class News {
 
 	@Id @GeneratedValue
+//	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name = "ID")
 	private int id;
 
