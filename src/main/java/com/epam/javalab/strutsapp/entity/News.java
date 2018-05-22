@@ -3,13 +3,14 @@ package com.epam.javalab.strutsapp.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "NEWS")
+@Table(name = "AANEWS")
 public class News {
 
-	@Id @GeneratedValue
-//	@GenericGenerator(name="increment", strategy = "increment")
+	@Id @GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name = "ID")
 	private int id;
 
@@ -19,16 +20,15 @@ public class News {
 	@Column(name = "AUTHOR")
 	private String author;
 
-	@Column(name = "TIME")
-	private long time;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATEZ")
+	private Date date;
 
 	@Column(name = "BRIEF")
 	private String brief;
 
 	@Column(name = "CONTENT")
 	private String content;
-
-	public News() {}
 
 	public int getId() {
 		return id;
@@ -54,12 +54,12 @@ public class News {
 		this.author = author;
 	}
 
-	public long getTime() {
-		return time;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setTime(long time) {
-		this.time = time;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getBrief() {

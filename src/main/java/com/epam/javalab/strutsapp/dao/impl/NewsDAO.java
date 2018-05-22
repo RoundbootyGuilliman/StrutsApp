@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +17,7 @@ import java.util.*;
 @Component("newsDAO")
 public class NewsDAO implements INewsDAO {
 
-	private static SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@PostConstruct
 	private void init() {
@@ -38,25 +39,20 @@ public class NewsDAO implements INewsDAO {
 	}
 
 	@Override
-	public Map<Integer, News> getAllNews() {
+	public List<News> getAllNews() {
 		Session session = sessionFactory.openSession();
-		Map<Integer, News> newsMap = new HashMap<>();
 		session.beginTransaction();
-
 		List<News> newsList = session.createQuery("from News").list();
-		for (News news : newsList) {
-			newsMap.put(news.getId(), news);
-		}
 		session.getTransaction().commit();
 		session.close();
-		return newsMap;
+		return newsList;
 	}
 
 	@Override
 	public News getNewsById(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		News news = (News) session.createQuery("FROM News WHERE id=0").uniqueResult();
+		News news = (News) session.createQuery("FROM News WHERE id=:id").setParameter("id", id).uniqueResult();
 		session.getTransaction().commit();
 		session.close();
 		return news;

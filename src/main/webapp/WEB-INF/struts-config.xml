@@ -6,23 +6,28 @@
 <struts-config>
 
 	<form-beans>
-		<form-bean name="mainForm" type="com.epam.javalab.strutsapp.form.MainForm"/>
-		<form-bean name="newsForm" type="com.epam.javalab.strutsapp.form.NewsForm"/>
 		<form-bean name="userForm" type="com.epam.javalab.strutsapp.form.UserForm"/>
+		<form-bean name="editForm" type="com.epam.javalab.strutsapp.form.EditNewsForm"/>
+		<form-bean name="showForm" type="com.epam.javalab.strutsapp.form.ShowNewsForm"/>
 	</form-beans>
 
 	<action-mappings>
-		<action path="/main" type="com.epam.javalab.strutsapp.action.MainAction" name="mainForm">
+		<action path="/main" type="com.epam.javalab.strutsapp.action.MainAction">
 			<forward name="success" path="/WEB-INF/main.jsp"/>
 		</action>
 
-		<action path="/news" type="com.epam.javalab.strutsapp.action.NewsAction" name="newsForm">
+		<action path="/news" type="com.epam.javalab.strutsapp.action.ShowNewsAction" name="showForm">
 			<forward name="success" path="/WEB-INF/news.jsp"/>
 		</action>
 
 		<action path="/locale" type="com.epam.javalab.strutsapp.action.LanguageSelectAction" parameter="method">
 			<forward name="success" path="index.jsp" redirect="true"/>
 		</action>
+		<action path="/add" type="com.epam.javalab.strutsapp.action.AddNewsAction" name="editForm" input="/WEB-INF/add.jsp">
+			<forward name="success" path="index.jsp" redirect="true"/>
+		</action>
+
+		<action path="/addforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/add.jsp"/>
 	</action-mappings>
 
 	<message-resources parameter="com.epam.javalab.strutsapp.properties.strutsapp" />

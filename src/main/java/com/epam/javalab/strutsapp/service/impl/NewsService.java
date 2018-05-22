@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class NewsService implements INewsService {
@@ -23,16 +21,16 @@ public class NewsService implements INewsService {
 	private INewsConverter converter = new NewsConverter();
 
 	@Override
-	public Map<Integer, NewsDTO> getAllNews(Locale locale) {
+	public List<NewsDTO> getAllNews(Locale locale) {
 
-		Map<Integer, News> newsMap = newsDAO.getAllNews();
-		Map<Integer, NewsDTO> newsDTOMap = new HashMap<>();
+		List<News> newsList = newsDAO.getAllNews();
+		List<NewsDTO> newsDTOList = new ArrayList<>();
 
-		for (Map.Entry<Integer, News> entry : newsMap.entrySet()) {
-			newsDTOMap.put(entry.getKey(), converter.convertToDTO(entry.getValue(), locale));
+		for (News news : newsList) {
+			newsDTOList.add(converter.convertToDTO(news, locale));
 		}
 
-		return newsDTOMap;
+		return newsDTOList;
 	}
 
 	@Override
@@ -41,5 +39,11 @@ public class NewsService implements INewsService {
 		News news = newsDAO.getNewsById(id);
 
 		return converter.convertToDTO(news, locale);
+	}
+
+	@Override
+	public void setNews(NewsDTO newsDTO) {
+		News news = converter.convertToEntity(newsDTO);
+		newsDAO.saveNews(news);
 	}
 }

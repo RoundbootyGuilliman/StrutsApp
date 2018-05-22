@@ -9,7 +9,7 @@
 	<h3>Some Links</h3>
 	<p>Lorem ipsum dolor sit ame.</p>
 	<ul class="nav nav-pills flex-column">
-		<li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+		<li class="nav-item"><html:link page="/addforward.do" styleClass="nav-link active">Add news</html:link></li>
 		<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 		<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 		<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>

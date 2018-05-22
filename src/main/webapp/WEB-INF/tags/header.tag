@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 
 <div class="jumbotron text-center" style="margin-bottom:0">
-	<h1>HOBOSTI</h1>
+	<h1>HOBOCTN</h1>
 	<p><bean:message key="app.message" /> </p>
 </div>
 

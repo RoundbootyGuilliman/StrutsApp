@@ -3,7 +3,6 @@ package com.epam.javalab.strutsapp.converter.impl;
 import com.epam.javalab.strutsapp.converter.INewsConverter;
 import com.epam.javalab.strutsapp.dto.NewsDTO;
 import com.epam.javalab.strutsapp.entity.News;
-import com.epam.javalab.strutsapp.util.TimeAndDateHandler;
 
 import java.util.Locale;
 
@@ -17,8 +16,7 @@ public class NewsConverter implements INewsConverter {
 		newsDTO.setId(news.getId());
 		newsDTO.setTitle(news.getTitle());
 		newsDTO.setAuthor(news.getAuthor());
-		newsDTO.setTime(news.getTime());
-		newsDTO.setDate(TimeAndDateHandler.setDate(news.getTime(), locale));
+		newsDTO.setDate(news.getDate());
 		newsDTO.setBrief(news.getBrief());
 		newsDTO.setContent(news.getContent());
 
@@ -33,7 +31,7 @@ public class NewsConverter implements INewsConverter {
 		news.setId(newsDTO.getId());
 		news.setTitle(newsDTO.getTitle());
 		news.setAuthor(newsDTO.getAuthor());
-		news.setTime(newsDTO.getTime());
+		news.setDate(newsDTO.getDate());
 		news.setBrief(newsDTO.getBrief());
 		news.setContent(newsDTO.getContent());
 

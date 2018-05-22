@@ -5,7 +5,7 @@
 
 <html lang="en">
 <head>
-	<title><bean:write name="newsForm" property="news.title"/></title>
+	<title>${showForm.news.title}</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -24,10 +24,10 @@
 	<div class="row">
 		<tag:sidebar/>
 		<div class="col-sm-8">
-			<h2>${newsForm.news.title}</h2>
-			<h5>${newsForm.news.author}, ${newsForm.news.date}</h5>
+			<h2>${showForm.news.title}</h2>
+			<h5>${showForm.news.author}, ${showForm.news.date}</h5>
 			<div class="fakeimg">Fake Image</div>
-			<p>${newsForm.news.content}</p>
+			<p>${showForm.news.content}</p>
 			<br>
 		</div>
 	</div>

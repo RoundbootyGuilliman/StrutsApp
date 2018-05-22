@@ -1,24 +1,14 @@
-package com.epam.javalab.strutsapp.dto;
+package com.epam.javalab.strutsapp.form;
 
-import java.util.Date;
+import org.apache.struts.action.ActionForm;
 
-public class NewsDTO {
+public class EditNewsForm extends ActionForm {
 
-	private int id;
 	private String title;
 	private String author;
-	private Date date;
+	private String date;
 	private String brief;
 	private String content;
-
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getTitle() {
 		return title;
@@ -36,11 +26,11 @@ public class NewsDTO {
 		this.author = author;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

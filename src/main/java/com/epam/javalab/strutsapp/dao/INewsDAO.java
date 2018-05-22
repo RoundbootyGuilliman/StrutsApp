@@ -2,11 +2,11 @@ package com.epam.javalab.strutsapp.dao;
 
 import com.epam.javalab.strutsapp.entity.News;
 
-import java.util.Map;
+import java.util.List;
 
 public interface INewsDAO {
 
-	Map<Integer, News> getAllNews();
+	List<News> getAllNews();
 	News getNewsById(int id);
 	void saveNews(News news);
 }
