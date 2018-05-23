@@ -25,20 +25,20 @@
 	<div class="row">
 		<tag:sidebar/>
 		<div class="col-sm-8">
-			<html:form action="/add">
+			<html:form action="/newsDispatch?method=add">
 
 				<br/>
 				Title:
-				<html:text property="title" size="20"/>
+				<html:text property="news.title" size="20"/>
 				<br/>
 				Author:
-				<html:text property="author" size="20"/>
+				<html:text property="news.author" size="20"/>
 				<br/>
 				Brief:
-				<html:text property="brief" size="20"/>
+				<html:text property="news.brief" size="20"/>
 				<br/>
 				Content:
-				<html:text property="content" size="20"/>
+				<html:text property="news.content" size="20"/>
 				<br/><br/>
 				<html:submit>
 					Submit

@@ -9,4 +9,5 @@ public interface INewsDAO {
 	List<News> getAllNews();
 	News getNewsById(int id);
 	void saveNews(News news);
+	void deleteNews(int id);
 }

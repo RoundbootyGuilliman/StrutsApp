@@ -14,11 +14,12 @@ import org.apache.struts.actions.DispatchAction;
 public class LanguageSelectAction extends DispatchAction {
 
 	private static final Locale RUSSIAN = new Locale("ru", "KZ");
+	private static final Locale ENGLISH = new Locale("en", "US");
 
 	public ActionForward english(ActionMapping mapping, ActionForm form,
 								 HttpServletRequest request, HttpServletResponse response) {
 
-		request.getSession().setAttribute(Globals.LOCALE_KEY, Locale.US);
+		request.getSession().setAttribute("locale", ENGLISH);
 
 		return mapping.findForward("success");
 	}
@@ -26,7 +27,7 @@ public class LanguageSelectAction extends DispatchAction {
 	public ActionForward russian(ActionMapping mapping, ActionForm form,
 								HttpServletRequest request, HttpServletResponse response) {
 
-		request.getSession().setAttribute(Globals.LOCALE_KEY, RUSSIAN);
+		request.getSession().setAttribute("locale", RUSSIAN);
 
 		return mapping.findForward("success");
 	}

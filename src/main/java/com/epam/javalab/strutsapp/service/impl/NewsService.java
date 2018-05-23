@@ -21,29 +21,34 @@ public class NewsService implements INewsService {
 	private INewsConverter converter = new NewsConverter();
 
 	@Override
-	public List<NewsDTO> getAllNews(Locale locale) {
+	public List<NewsDTO> getAllNews() {
 
 		List<News> newsList = newsDAO.getAllNews();
 		List<NewsDTO> newsDTOList = new ArrayList<>();
 
 		for (News news : newsList) {
-			newsDTOList.add(converter.convertToDTO(news, locale));
+			newsDTOList.add(converter.convertToDTO(news));
 		}
 
 		return newsDTOList;
 	}
 
 	@Override
-	public NewsDTO getNewsById(int id, Locale locale) {
+	public NewsDTO getNewsById(int id) {
 
 		News news = newsDAO.getNewsById(id);
 
-		return converter.convertToDTO(news, locale);
+		return converter.convertToDTO(news);
 	}
 
 	@Override
 	public void setNews(NewsDTO newsDTO) {
 		News news = converter.convertToEntity(newsDTO);
 		newsDAO.saveNews(news);
+	}
+
+	@Override
+	public void deleteNews(int id) {
+		newsDAO.deleteNews(id);
 	}
 }

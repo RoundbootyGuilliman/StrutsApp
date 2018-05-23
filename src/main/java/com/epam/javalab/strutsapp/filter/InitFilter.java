@@ -21,12 +21,12 @@ public class InitFilter implements Filter {
 		HttpSession session = request.getSession();
 
 
-		if (session.getAttribute(Globals.LOCALE_KEY) == null) {
+		if (session.getAttribute("locale") == null) {
 			Locale userPrefLocale = new Locale("ru", "KZ");
 			if (request.getLocale().toString().contains("en")) {
 				userPrefLocale = new Locale("en", "US");
 			}
-			session.setAttribute(Globals.LOCALE_KEY, userPrefLocale);
+			session.setAttribute("locale", userPrefLocale);
 		}
 		filterChain.doFilter(servletRequest, servletResponse);
 	}

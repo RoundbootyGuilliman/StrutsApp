@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class MainAction extends ActionSupport {
 
-	INewsService service;
+	private INewsService service;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 								 HttpServletRequest request, HttpServletResponse response) {
@@ -23,7 +23,7 @@ public class MainAction extends ActionSupport {
 		WebApplicationContext context = getWebApplicationContext();
 		service = (INewsService) context.getBean("newsService");
 
-		request.setAttribute("newsList", service.getAllNews(locale));
+		request.setAttribute("newsList", service.getAllNews());
 
 		return mapping.findForward("success");
 	}

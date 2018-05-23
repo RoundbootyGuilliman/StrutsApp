@@ -7,6 +7,6 @@ import java.util.Locale;
 
 public interface INewsConverter {
 
-	NewsDTO convertToDTO(News news, Locale locale);
+	NewsDTO convertToDTO(News news);
 	News convertToEntity(NewsDTO newsDTO);
 }

@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -42,7 +41,9 @@ public class NewsDAO implements INewsDAO {
 	public List<News> getAllNews() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+
 		List<News> newsList = session.createQuery("from News").list();
+
 		session.getTransaction().commit();
 		session.close();
 		return newsList;
@@ -52,7 +53,9 @@ public class NewsDAO implements INewsDAO {
 	public News getNewsById(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+
 		News news = (News) session.createQuery("FROM News WHERE id=:id").setParameter("id", id).uniqueResult();
+
 		session.getTransaction().commit();
 		session.close();
 		return news;
@@ -62,66 +65,21 @@ public class NewsDAO implements INewsDAO {
 	public void saveNews(News news) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+
 		session.save(news);
+
 		session.getTransaction().commit();
 		session.close();
 	}
 
-//	/* Method to CREATE an employee in the database */
-//	public Integer addEmployee(String fname, String lname, int salary){
-//		Session session = factory.openSession();
-//		Transaction tx = null;
-//		Integer employeeID = null;
-//
-//		try {
-//			tx = session.beginTransaction();
-//			Employee employee = new Employee(fname, lname, salary);
-//			employeeID = (Integer) session.save(employee);
-//			tx.commit();
-//		} catch (HibernateException e) {
-//			if (tx!=null) tx.rollback();
-//			e.printStackTrace();
-//		} finally {
-//			session.close();
-//		}
-//		return employeeID;
-//	}
+	@Override
+	public void deleteNews(int id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 
+		session.delete(getNewsById(id));
 
-	/* Method to UPDATE salary for an employee */
-//	public void updateEmployee(Integer EmployeeID, int salary ){
-//		Session session = factory.openSession();
-//		Transaction tx = null;
-//
-//		try {
-//			tx = session.beginTransaction();
-//			Employee employee = (Employee)session.get(Employee.class, EmployeeID);
-//			employee.setSalary( salary );
-//			session.update(employee);
-//			tx.commit();
-//		} catch (HibernateException e) {
-//			if (tx!=null) tx.rollback();
-//			e.printStackTrace();
-//		} finally {
-//			session.close();
-//		}
-////	}
-//
-//	/* Method to DELETE an employee from the records */
-//	public void deleteEmployee(Integer EmployeeID){
-//		Session session = factory.openSession();
-//		Transaction tx = null;
-//
-//		try {
-//			tx = session.beginTransaction();
-//			Employee employee = (Employee)session.get(Employee.class, EmployeeID);
-//			session.delete(employee);
-//			tx.commit();
-//		} catch (HibernateException e) {
-//			if (tx!=null) tx.rollback();
-//			e.printStackTrace();
-//		} finally {
-//			session.close();
-//		}
-//	}
+		session.getTransaction().commit();
+		session.close();
+	}
 }

@@ -2,6 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="logic" uri="http://struts.apache.org/tags-logic" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 <head>
@@ -19,15 +20,15 @@
 <body>
 
 <tag:header/>
-
+<fmt:setLocale value="${pageContext.session.getAttribute('locale')}" />
 <div class="container" id="test" style="margin-top:30px">
 	<div class="row">
 		<tag:sidebar/>
 		<div class="col-sm-8">
-			<h2>${showForm.news.title}</h2>
-			<h5>${showForm.news.author}, ${showForm.news.date}</h5>
+			<h2>${newsForm.news.title}</h2>
+			<h5>${newsForm.news.author}, <fmt:formatDate value="${newsForm.news.date}" dateStyle="LONG"/></h5>
 			<div class="fakeimg">Fake Image</div>
-			<p>${showForm.news.content}</p>
+			<p>${newsForm.news.content}</p>
 			<br>
 		</div>
 	</div>

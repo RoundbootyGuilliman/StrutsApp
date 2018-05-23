@@ -9,7 +9,7 @@ import java.util.Locale;
 public class NewsConverter implements INewsConverter {
 
 	@Override
-	public NewsDTO convertToDTO(News news, Locale locale) {
+	public NewsDTO convertToDTO(News news) {
 
 		NewsDTO newsDTO = new NewsDTO();
 
