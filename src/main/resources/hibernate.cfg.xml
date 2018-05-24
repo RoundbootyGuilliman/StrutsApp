@@ -19,6 +19,8 @@
 		<property name="show_sql">true</property>
 
 		<mapping class="com.epam.javalab.strutsapp.entity.News"/>
+		<mapping class="com.epam.javalab.strutsapp.entity.User"/>
+		<mapping class="com.epam.javalab.strutsapp.entity.Role"/>
 
 	</session-factory>
 </hibernate-configuration>

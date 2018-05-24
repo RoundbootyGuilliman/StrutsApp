@@ -2,33 +2,38 @@ package com.epam.javalab.strutsapp.form;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.epam.javalab.strutsapp.dto.UserDTO;
+import com.epam.javalab.strutsapp.entity.Role;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-public class UserForm extends ActionForm{
+import java.util.ArrayList;
+import java.util.List;
 
-	private String username;
-	private String password;
+public class UserForm extends ActionForm {
 
-	public String getUsername() {
-		return username;
+	private int id;
+	private UserDTO user;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
+	public UserDTO getUser() {
+		return user;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser(UserDTO user) {
+		this.user = user;
 	}
 
-	@Override
+	/*@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
@@ -42,12 +47,12 @@ public class UserForm extends ActionForm{
 		}
 
 		return errors;
-	}
+	}*/
 
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		// reset properties
-		username = "";
-		password = "";
+		setId(0);
+		setUser(new UserDTO());
 	}
 }

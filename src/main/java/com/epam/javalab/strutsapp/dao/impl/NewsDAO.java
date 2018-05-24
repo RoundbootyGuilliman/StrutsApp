@@ -4,31 +4,17 @@ import com.epam.javalab.strutsapp.dao.INewsDAO;
 import com.epam.javalab.strutsapp.entity.News;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.*;
 
-@Component("newsDAO")
+@Component
 public class NewsDAO implements INewsDAO {
 
+	@Autowired
 	private SessionFactory sessionFactory;
-
-	@PostConstruct
-	private void init() {
-		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			StandardServiceRegistryBuilder.destroy(registry);
-			throw new ExceptionInInitializerError(ex);
-		}
-	}
 
 	@PreDestroy
 	private void destroy() {

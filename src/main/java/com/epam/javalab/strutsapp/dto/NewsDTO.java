@@ -11,7 +11,6 @@ public class NewsDTO {
 	private String brief;
 	private String content;
 
-
 	public int getId() {
 		return id;
 	}

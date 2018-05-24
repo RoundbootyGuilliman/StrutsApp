@@ -1,7 +1,7 @@
 package com.epam.javalab.strutsapp.action;
 
-import com.epam.javalab.strutsapp.form.NewsForm;
-import com.epam.javalab.strutsapp.service.INewsService;
+import com.epam.javalab.strutsapp.form.UserForm;
+import com.epam.javalab.strutsapp.service.IUserService;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -9,40 +9,36 @@ import org.springframework.web.struts.DispatchActionSupport;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
-public class NewsAction extends DispatchActionSupport {
+public class UserAction extends DispatchActionSupport {
 
-	private INewsService service;
-	private NewsForm newsForm;
+	private IUserService service;
+	private UserForm userForm;
 
 	@Override
 	protected void onInit() {
 		super.onInit();
-		service = (INewsService) getWebApplicationContext().getBean("newsService");
+		service = (IUserService) getWebApplicationContext().getBean("userService");
 	}
 
 	public ActionForward show(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
-		newsForm = (NewsForm) form;
-		newsForm.setNews(service.getNewsById(newsForm.getId()));
+		userForm = (UserForm) form;
 
 		return mapping.findForward("news");
 	}
 
 	public ActionForward add(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
-		newsForm = (NewsForm) form;
-		newsForm.getNews().setDate(new Date());
-		service.setNews(newsForm.getNews());
+		userForm = (UserForm) form;
+		service.register(userForm.getUser());
 
 		return mapping.findForward("main");
 	}
 
 	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
-		newsForm = (NewsForm) form;
-		service.deleteNews(newsForm.getId());
+		userForm = (UserForm) form;
 
 		return mapping.findForward("main");
 	}
