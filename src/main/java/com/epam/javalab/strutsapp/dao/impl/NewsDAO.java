@@ -48,12 +48,29 @@ public class NewsDAO implements INewsDAO {
 	}
 
 	@Override
+	public List<News> getNewsByAuthor(String username) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		List<News> newsList = (List<News>) session.createQuery("FROM News WHERE author=:username").setParameter("username", username).list();
+
+		session.getTransaction().commit();
+		session.close();
+		return newsList;
+	}
+
+	@Override
 	public void saveNews(News news) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(news);
-
+		if (news.getId() == 0) {
+			System.out.println("save");
+			session.save(news);
+		} else {
+			System.out.println("update");
+			session.update(news);
+		}
 		session.getTransaction().commit();
 		session.close();
 	}

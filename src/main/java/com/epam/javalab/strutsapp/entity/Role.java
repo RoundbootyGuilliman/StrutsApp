@@ -5,19 +5,17 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "AAROLES")
+@Table(name = "roles")
 public class Role {
 
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name = "ROLE_ID")
+	@Column(name = "role_id")
 	private int id;
-
-	@Column(name = "USERNAME")
+	
 	private String username;
-
-	@Column(name = "USER_ROLE")
+	
 	private String role;
 
 	public int getId() {

@@ -33,14 +33,22 @@ public class NewsService implements INewsService {
 
 	@Override
 	public NewsDTO getNewsById(int id) {
-		News news = newsDAO.getNewsById(id);
-		return converter.convertToDTO(news);
+		return converter.convertToDTO(newsDAO.getNewsById(id));
+	}
+
+	@Override
+	public List<NewsDTO> getNewsByAuthor(String username) {
+		List<News> newsList = newsDAO.getNewsByAuthor(username);
+		List<NewsDTO> newsDTOList = new ArrayList<>();
+		for (News news : newsList) {
+			newsDTOList.add(converter.convertToDTO(news));
+		}
+		return newsDTOList;
 	}
 
 	@Override
 	public void setNews(NewsDTO newsDTO) {
-		News news = converter.convertToEntity(newsDTO);
-		newsDAO.saveNews(news);
+		newsDAO.saveNews(converter.convertToEntity(newsDTO));
 	}
 
 	@Override

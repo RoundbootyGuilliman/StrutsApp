@@ -33,21 +33,21 @@ public class UserForm extends ActionForm {
 		this.user = user;
 	}
 
-	/*@Override
+	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
 
-		if (getUsername() == null || ("".equals(getUsername()))) {
+		if (user.getUsername() == null || ("".equals(user.getUsername()))) {
 			errors.add("common.username.err", new ActionMessage("error.common.username.required"));
 		}
 
-		if (getPassword() == null || ("".equals(getPassword()))) {
+		if (user.getPassword() == null || ("".equals(user.getPassword()))) {
 			errors.add("common.password.err", new ActionMessage("error.common.password.required"));
 		}
 
 		return errors;
-	}*/
+	}
 
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {

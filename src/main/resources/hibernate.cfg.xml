@@ -5,18 +5,24 @@
 <hibernate-configuration>
 	<session-factory>
 
-		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
-		<property name="hibernate.connection.username">sys as sysdba</property>
-		<property name="hibernate.connection.password">Oracle_1</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/news_app</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
 
-		<property name="connection.pool_size">10</property>
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">20</property>
 
-		<property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
+		<!-- Disable the second-level cache  -->
 		<property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
 
+		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
+
+		<!-- Drop and re-create the database schema on startup -->
 
 		<mapping class="com.epam.javalab.strutsapp.entity.News"/>
 		<mapping class="com.epam.javalab.strutsapp.entity.User"/>

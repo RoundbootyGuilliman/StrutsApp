@@ -14,6 +14,24 @@
 		<action path="/newsDispatch" type="com.epam.javalab.strutsapp.action.NewsAction" name="newsForm" parameter="method">
 			<forward name="main" path="/index.jsp" redirect="true"/>
 			<forward name="news" path="/WEB-INF/news.jsp"/>
+			<forward name="edit" path="/WEB-INF/add.jsp"/>
+			<forward name="user" path="/WEB-INF/user.jsp"/>
+			<forward name="admin" path="/WEB-INF/admin.jsp"/>
+		</action>
+
+		<action path="/userDispatch" type="com.epam.javalab.strutsapp.action.UserAction" name="userForm" parameter="method" input="/WEB-INF/register.jsp">
+			<forward name="main" path="/index.jsp" redirect="true"/>
+			<forward name="login" path="/WEB-INF/login.jsp"/>
+			<forward name="admin" path="/newsDispatch.do?method=admin"/>
+		</action>
+
+		<action path="/logout" type="com.epam.javalab.strutsapp.action.UserAction" parameter="method">
+			<forward name="main" path="/index.jsp" redirect="true"/>
+		</action>
+
+		<action path="/login" type="com.epam.javalab.strutsapp.action.UserAction" parameter="method" name="userForm" input="/WEB-INF/login.jsp">
+			<forward name="main" path="/index.jsp" redirect="true"/>
+			<forward name="login" path="/WEB-INF/login.jsp"/>
 		</action>
 		
 		<action path="/main" type="com.epam.javalab.strutsapp.action.MainAction">
@@ -24,9 +42,13 @@
 			<forward name="success" path="index.jsp" redirect="true"/>
 		</action>
 
-		<action name="newsForm" path="/addforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/add.jsp" />
+		<action name="newsForm" validate="false" path="/addforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/add.jsp"/>
+		<action name="userForm" validate="false" path="/regforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/register.jsp" input="/WEB-INF/register.jsp"/>
+		<action name="userForm" validate="false" path="/logforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/login.jsp" input="/WEB-INF/login.jsp"/>
+		<action path="/adminforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/admin.jsp"/>
+		<action path="/userforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/user.jsp"/>
 	</action-mappings>
 
-	<message-resources parameter="com.epam.javalab.strutsapp.properties.strutsapp" />
+	<message-resources parameter="com.epam.javalab.strutsapp.properties.shit"/>
 
 </struts-config>

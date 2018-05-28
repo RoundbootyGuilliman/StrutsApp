@@ -8,6 +8,7 @@ public interface INewsDAO {
 
 	List<News> getAllNews();
 	News getNewsById(int id);
+	List<News> getNewsByAuthor(String username);
 	void saveNews(News news);
 	void deleteNews(int id);
 }

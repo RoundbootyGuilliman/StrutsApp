@@ -6,19 +6,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "AAUSERS")
+@Table(name = "users")
 public class User {
 
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
-	@Column(name = "USER_ID")
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "user_id")
 	private int id;
-
-	@Column(name = "USERNAME")
+	
 	private String username;
-
-	@Column(name = "PASSWORD")
+	
 	private String password;
 
 	@OneToMany(cascade = CascadeType.ALL)

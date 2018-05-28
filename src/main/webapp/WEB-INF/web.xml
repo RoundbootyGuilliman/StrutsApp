@@ -5,6 +5,37 @@
 
 	<display-name>Maven Struts Examples</display-name>
 
+	<security-role><role-name>Admin</role-name></security-role>
+	<security-role><role-name>User</role-name></security-role>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/WEB-INF/login.jsp</form-login-page>
+			<form-error-page>/WEB-INF/login.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>User-restricted</web-resource-name>
+			<url-pattern>/user.jsp</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Admin</role-name>
+			<role-name>User</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Admin-restricted</web-resource-name>
+			<url-pattern>/admin.jsp</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>com.epam.javalab.strutsapp.filter.EncodingFilter</filter-class>
@@ -13,7 +44,6 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
 	<filter>
 		<filter-name>InitFilter</filter-name>
 		<filter-class>com.epam.javalab.strutsapp.filter.InitFilter</filter-class>
@@ -22,6 +52,7 @@
 		<filter-name>InitFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
@@ -39,6 +70,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
@@ -47,4 +79,5 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>com.epam.javalab.strutsapp.util.AppConfig</param-value>
 	</context-param>
+
 </web-app>

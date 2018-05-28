@@ -17,7 +17,7 @@
 		}
 	</style>
 </head>
-<body>
+<body onload="ok()">
 
 <tag:header/>
 <fmt:setLocale value="${pageContext.session.getAttribute('locale')}" />
@@ -30,6 +30,18 @@
 			<div class="fakeimg">Fake Image</div>
 			<p>${newsForm.news.content}</p>
 			<br>
+			<html:form styleClass="editButton" action="/newsDispatch?method=openEdit">
+				<html:hidden property="id" value="${newsForm.news.id}"/>
+				<html:submit value="Редактировать новость"/>
+			</html:form>
+			<html:form styleId="delete" action="/newsDispatch?method=delete">
+				<html:hidden property="id" value="${newsForm.news.id}"/>
+				<html:submit><bean:message key="deleteNews"/></html:submit>
+			</html:form>
+			<%--<form name="newsForm" id="delete" method="post" action="/newsDispatch.do?method=delete">--%>
+				<%--<input type="hidden" name="newsToDelete" value="${newsForm.news.id}">--%>
+				<%--<input type="submit" value="${deleteNews}"/>--%>
+			<%--</form>--%>
 		</div>
 	</div>
 </div>

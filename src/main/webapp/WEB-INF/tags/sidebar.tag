@@ -2,17 +2,16 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 
 <div class="col-sm-4">
-	<h2>About Me</h2>
-	<h5>Photo of me:</h5>
-	<div class="fakeimg">Fake Image</div>
-	<p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-	<h3>Some Links</h3>
-	<p>Lorem ipsum dolor sit ame.</p>
+	<h2 id="loginmessage" hidden>You are not logged in</h2>
+	<h2>${pageContext.request.remoteUser}</h2>
+	<div id="av" class="fakeimg">Fake Image</div>
+	<br>
+	<h4 id="userRights" hidden>Your rights: User</h4>
+	<h4 id="adminRights" hidden>Your rights: Admin</h4>
 	<ul class="nav nav-pills flex-column">
-		<li class="nav-item"><html:link page="/addforward.do" styleClass="nav-link active">Add news</html:link></li>
-		<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-		<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+		<li class="nav-item"><html:link page="/addforward.do" styleClass="btn btn-outline-success btn-block">Add news</html:link></li>
+		<li id="adminpage" hidden class="nav-item"><html:link page="/newsDispatch.do?method=admin" styleClass="btn btn-outline-primary btn-block">Admin page</html:link></li>
+		<li id="mypage" hidden class="nav-item"><html:link page="/newsDispatch.do?method=showUser" styleClass="btn btn-outline-primary btn-block">My page</html:link></li>
 	</ul>
 	<hr class="d-sm-none">
 </div>

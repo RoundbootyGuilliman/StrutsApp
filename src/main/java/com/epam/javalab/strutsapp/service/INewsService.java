@@ -8,6 +8,7 @@ public interface INewsService {
 
 	List<NewsDTO> getAllNews();
 	NewsDTO getNewsById(int id);
+	List<NewsDTO> getNewsByAuthor(String username);
 	void setNews(NewsDTO newsDTO);
 	void deleteNews(int id);
 }

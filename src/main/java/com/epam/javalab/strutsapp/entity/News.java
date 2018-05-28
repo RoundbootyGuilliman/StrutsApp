@@ -6,28 +6,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "AANEWS")
+@Table(name = "news")
 public class News {
 
 	@Id @GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	@Column(name = "ID")
 	private int id;
 
-	@Column(name = "TITLE")
 	private String title;
 
-	@Column(name = "AUTHOR")
 	private String author;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DATEZ")
 	private Date date;
 
-	@Column(name = "BRIEF")
 	private String brief;
 
-	@Column(name = "CONTENT")
 	private String content;
 
 	public int getId() {
