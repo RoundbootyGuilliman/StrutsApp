@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "news")
@@ -23,6 +24,9 @@ public class News {
 	private String brief;
 
 	private String content;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Comment> comments;
 
 	public int getId() {
 		return id;
@@ -70,5 +74,13 @@ public class News {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }

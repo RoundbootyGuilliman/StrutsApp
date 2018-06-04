@@ -25,6 +25,7 @@
 		<!-- Drop and re-create the database schema on startup -->
 
 		<mapping class="com.epam.javalab.strutsapp.entity.News"/>
+		<mapping class="com.epam.javalab.strutsapp.entity.Comment"/>
 		<mapping class="com.epam.javalab.strutsapp.entity.User"/>
 		<mapping class="com.epam.javalab.strutsapp.entity.Role"/>
 

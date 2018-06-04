@@ -49,6 +49,6 @@
 		<action path="/userforward" type="org.apache.struts.actions.ForwardAction" parameter="/WEB-INF/user.jsp"/>
 	</action-mappings>
 
-	<message-resources parameter="com.epam.javalab.strutsapp.properties.shit"/>
+	<message-resources parameter="com.epam.javalab.strutsapp.properties.strutsapp" />
 
 </struts-config>

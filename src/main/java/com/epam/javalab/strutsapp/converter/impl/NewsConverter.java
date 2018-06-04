@@ -19,6 +19,7 @@ public class NewsConverter implements INewsConverter {
 		newsDTO.setDate(news.getDate());
 		newsDTO.setBrief(news.getBrief());
 		newsDTO.setContent(news.getContent());
+		newsDTO.setComments(news.getComments());
 		return newsDTO;
 	}
 
@@ -31,6 +32,7 @@ public class NewsConverter implements INewsConverter {
 		news.setDate(newsDTO.getDate());
 		news.setBrief(newsDTO.getBrief());
 		news.setContent(newsDTO.getContent());
+		news.setComments(newsDTO.getComments());
 		return news;
 	}
 }

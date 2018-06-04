@@ -12,6 +12,7 @@ public class NewsForm extends ActionForm {
 
 	private int id;
 	private NewsDTO news;
+	private String comment;
 
 	public int getId() {
 		return id;
@@ -29,10 +30,19 @@ public class NewsForm extends ActionForm {
 		this.news = news;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		super.reset(mapping, request);
 		setId(0);
 		setNews(new NewsDTO());
+		setComment("");
 	}
 }

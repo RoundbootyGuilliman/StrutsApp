@@ -1,6 +1,10 @@
 package com.epam.javalab.strutsapp.dto;
 
+import com.epam.javalab.strutsapp.entity.Comment;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class NewsDTO {
 
@@ -10,6 +14,7 @@ public class NewsDTO {
 	private Date date;
 	private String brief;
 	private String content;
+	private List<Comment> comments = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -57,5 +62,13 @@ public class NewsDTO {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 }

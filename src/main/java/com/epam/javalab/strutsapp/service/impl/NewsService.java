@@ -3,6 +3,7 @@ package com.epam.javalab.strutsapp.service.impl;
 import com.epam.javalab.strutsapp.converter.INewsConverter;
 import com.epam.javalab.strutsapp.dao.INewsDAO;
 import com.epam.javalab.strutsapp.dto.NewsDTO;
+import com.epam.javalab.strutsapp.entity.Comment;
 import com.epam.javalab.strutsapp.entity.News;
 import com.epam.javalab.strutsapp.entity.Role;
 import com.epam.javalab.strutsapp.entity.User;

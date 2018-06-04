@@ -1,5 +1,7 @@
 package com.epam.javalab.strutsapp.action;
 
+import com.epam.javalab.strutsapp.dto.NewsDTO;
+import com.epam.javalab.strutsapp.entity.Comment;
 import com.epam.javalab.strutsapp.form.NewsForm;
 import com.epam.javalab.strutsapp.service.INewsService;
 import com.epam.javalab.strutsapp.service.IUserService;
@@ -81,6 +83,21 @@ public class NewsAction extends DispatchActionSupport {
 		} else {
 			service.deleteNews(newsForm.getId());
 		}
+		return mapping.findForward("main");
+	}
+
+	public ActionForward addComment(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+
+		newsForm = (NewsForm) form;
+
+		NewsDTO newsDTO = service.getNewsById(newsForm.getId());
+		Comment comment = new Comment();
+		comment.setUsername(request.getRemoteUser());
+		comment.setDate(new Date());
+		comment.setComment(newsForm.getComment());
+		newsDTO.getComments().add(comment);
+		service.setNews(newsDTO);
+
 		return mapping.findForward("main");
 	}
 }

@@ -26,16 +26,24 @@
 <div class="container" id="test" style="margin-top:30px">
 	<div class="row">
 		<tag:sidebar/>
-		<div class="col-sm-8">
+
+		<div style="margin-left: 50px;" class="col-sm-1">
+			<br/>
+			Username:
+			<br/>
+
+			<br/>
+			Password:
+		</div>
+		<div class="col-sm-1">
 			<html:form action="/login?method=login">
 				<c:set var="erruser"><html:errors property="common.username.err"/></c:set>
 				<c:set var="errpass"><html:errors property="common.password.err"/></c:set>
 				<br/>
-				Username:
 				<html:text property="user.username" size="20" value="${erruser}"/>
 				<br/>
-				Password:
-				<html:text property="user.password" size="20" value="${errpass}"/>
+				<br/>
+				<html:password property="user.password" size="20" value="${errpass}"/>
 				<br/><br/>
 				<html:submit>
 					Submit
@@ -43,6 +51,7 @@
 
 			</html:form>
 		</div>
+
 	</div>
 </div>
 

@@ -62,7 +62,11 @@
 		</div>
 	</div>
 </div>
-
+<fmt:bundle basename="strutsapp">
+	<fmt:message key="app.message" var="sdf"/>
+</fmt:bundle>
+${sdf}
+<p> </p>
 <tag:footer/>
 
 </body>
