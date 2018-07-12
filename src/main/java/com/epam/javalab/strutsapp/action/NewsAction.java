@@ -89,7 +89,7 @@ public class NewsAction extends DispatchActionSupport {
 	public ActionForward addComment(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
 		newsForm = (NewsForm) form;
-
+		
 		NewsDTO newsDTO = service.getNewsById(newsForm.getId());
 		Comment comment = new Comment();
 		comment.setUsername(request.getRemoteUser());
@@ -97,7 +97,7 @@ public class NewsAction extends DispatchActionSupport {
 		comment.setComment(newsForm.getComment());
 		newsDTO.getComments().add(comment);
 		service.setNews(newsDTO);
-
+		
 		return mapping.findForward("main");
 	}
 }

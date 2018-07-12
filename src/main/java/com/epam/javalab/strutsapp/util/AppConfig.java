@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "com.epam.javalab.strutsapp")
 public class AppConfig {
-
+	
 	@Bean
 	public SessionFactory sessionFactory() {
 		SessionFactory sessionFactory;
